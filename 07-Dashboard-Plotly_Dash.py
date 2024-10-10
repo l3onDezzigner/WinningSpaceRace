@@ -1,11 +1,3 @@
-# Import required libraries
-#import pandas as pd
-#import dash
-#import dash_html_components as html
-#import dash_core_components as dcc
-#from dash.dependencies import Input, Output
-#import plotly.express as px
-
 import pandas as pd
 import dash
 from dash import html, dcc  # Updated imports from Dash
