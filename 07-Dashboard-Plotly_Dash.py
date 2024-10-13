@@ -63,20 +63,25 @@ app.layout = html.Div(children=[html.H1('SpaceX Launch Records Dashboard',
 )
 def get_pie_chart(entered_site):
     if entered_site == 'ALL':
-        # For all sites, calculate the total success and failed counts
-        success_counts = spacex_df['class'].value_counts()
-        fig = px.pie(values=success_counts,
-                     names=success_counts.index.map({1: 'Success', 0: 'Failed'}),
-                     title='Total Launch Success Counts for All Sites')
+        # Calculate the total number of launches for each site
+        site_counts = spacex_df['Launch Site'].value_counts()
+        fig = px.pie(
+            values=site_counts,
+            names=site_counts.index,
+            title='Total Launches for All Sites'
+        )
         return fig
     else:
-        # For a specific site, filter the DataFrame
+        # For a specific site, show Success vs Failed counts
         filtered_df = spacex_df[spacex_df['Launch Site'] == entered_site]
         success_counts = filtered_df['class'].value_counts()
-        fig = px.pie(values=success_counts,
-                     names=success_counts.index.map({1: 'Success', 0: 'Failed'}),
-                     title=f'Launch Success Counts for {entered_site}')
+        fig = px.pie(
+            values=success_counts,
+            names=success_counts.index.map({1: 'Success', 0: 'Failed'}),
+            title=f'Launch Success Counts for {entered_site}'
+        )
         return fig
+
 
 # TASK 4:
 # Add a callback function for `site-dropdown` and `payload-slider` as inputs, `success-payload-scatter-chart` as output
